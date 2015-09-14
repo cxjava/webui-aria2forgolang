@@ -8,3 +8,10 @@ HomeUrl = "/"
 
 #静态文件,根目录的文件夹名字: yaaw ==> /yaaw
 StaticFS = ["yaaw","aria"]
+
+#远程地址
+RemoteAddress = "http://127.0.0.1:15555/h/ping"
+
+#ping 的时间间隔,单位：分钟
+PingInterval = 5
+

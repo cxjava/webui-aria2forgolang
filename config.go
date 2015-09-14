@@ -6,6 +6,8 @@ type Config struct {
 	ListenAddress string `default:":55555"`
 	HomeUrl       string `default:"/"`
 	StaticFS      []string
+	PingInterval  int    `default:5`
+	RemoteAddress string `default:"/"`
 }
 
 var (
