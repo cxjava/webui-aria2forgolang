@@ -19,7 +19,7 @@ func main() {
 	r := gin.Default()
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
-	r.Static("/d", "./d")
+	r.StaticFS("/d", http.Dir("d"))
 
 	r.GET(config.HomeUrl, func(c *gin.Context) {
 		c.JSON(http.StatusOK, "welcome home!")
