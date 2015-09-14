@@ -6,6 +6,7 @@ type Config struct {
 	ListenAddress string `default:":55555"`
 	HomeUrl       string `default:"/h"`
 	ForwardPort   string `default: "45555"`
+	StaticFS      []string
 }
 
 var (

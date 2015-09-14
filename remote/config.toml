@@ -9,3 +9,6 @@ HomeUrl = "/h"
 #跳转的远程端口
 ForwardPort = ":55555"
 
+#静态文件,根目录的文件夹名字: yaaw ==> /yaaw
+StaticFS = ["d","yaaw","aria"]
+
