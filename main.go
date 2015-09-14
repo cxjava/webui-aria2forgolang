@@ -20,7 +20,6 @@ func main() {
 	r.SetHTMLTemplate(html)
 
 	r.Static("/assets", "./assets")
-	r.Static("/d", "./d")
 
 	r.GET(config.HomeUrl, func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
