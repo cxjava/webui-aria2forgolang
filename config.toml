@@ -6,3 +6,5 @@ ListenAddress = ":55555"
 #主页地址
 HomeUrl = "/"
 
+#静态文件,根目录的文件夹名字: yaaw ==> /yaaw
+StaticFS = ["yaaw","aria2"]

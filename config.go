@@ -5,6 +5,7 @@ import "github.com/koding/multiconfig"
 type Config struct {
 	ListenAddress string `default:":55555"`
 	HomeUrl       string `default:"/"`
+	StaticFS      []string
 }
 
 var (

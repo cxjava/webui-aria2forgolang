@@ -1,7 +1,6 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
 
 	"github.com/gin-gonic/contrib/gzip"
@@ -16,13 +15,12 @@ func main() {
 	r := gin.Default()
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
-	html := template.Must(template.New("").Delims("[[", "]]").ParseFiles("./views/index.html"))
-	r.SetHTMLTemplate(html)
-
-	r.Static("/assets", "./assets")
+	for _, f := range config.StaticFS {
+		r.StaticFS("/"+f, http.Dir(f))
+	}
 
 	r.GET(config.HomeUrl, func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", nil)
+		c.JSON(http.StatusOK, "home!")
 	})
 
 	r.Run(config.ListenAddress)
