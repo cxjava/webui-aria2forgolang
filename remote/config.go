@@ -4,9 +4,8 @@ import "github.com/koding/multiconfig"
 
 type Config struct {
 	ListenAddress string `default:":55555"`
-	HomeUrl       string `default:"/"`
-	PingInterval  int    `default:5`
-	RemoteAddress string `default:"/"`
+	HomeUrl       string `default:"/h"`
+	ForwardPort   string `default: "45555"`
 }
 
 var (
