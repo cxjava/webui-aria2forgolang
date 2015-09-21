@@ -30,15 +30,15 @@ func main() {
 		c.JSON(http.StatusOK, "welcome home!")
 	})
 
-	authorized.GET(config.HomeUrl+"/ping", func(c *gin.Context) {
+	r.GET(config.HomeUrl+"/ping", func(c *gin.Context) {
 		addressAndPort := c.Request.RemoteAddr
 		fmt.Println("Remote address:", addressAndPort)
 		remoteAddress = addressAndPort[:strings.Index(addressAndPort, ":")]
 		c.JSON(http.StatusOK, "pong!")
 	})
 
-	authorized.GET(config.HomeUrl+"/aria2", func(c *gin.Context) {
-		c.Redirect(http.StatusFound, remoteAddress+config.ForwardPort)
+	authorized.GET(config.HomeUrl+"/ip", func(c *gin.Context) {
+		c.JSON(http.StatusOK, remoteAddress)
 	})
 
 	r.Run(config.ListenAddress)
