@@ -15,3 +15,12 @@ RemoteAddress = "http://127.0.0.1:15555/h/ping"
 #ping 的时间间隔,单位：分钟
 PingInterval = 5
 
+#BasicAuth 访问的用户名和密码
+#http://admin:admin321@127.0.0.1:55555/yaaw/
+#http://guest:guest@127.0.0.1:55555/yaaw/
+[Accounts]
+#用户名admin，密码admin321,密码必须小写
+admin="admin321"
+
+#guest="guest"
+
