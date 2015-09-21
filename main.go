@@ -15,11 +15,14 @@ func main() {
 	r := gin.Default()
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
+	// Group using gin.BasicAuth() middleware
+	authorized := r.Group("/", gin.BasicAuth(config.Accounts))
+
 	for _, f := range config.StaticFS {
-		r.StaticFS("/"+f, http.Dir(f))
+		authorized.StaticFS("/"+f, http.Dir(f))
 	}
 
-	r.GET(config.HomeUrl, func(c *gin.Context) {
+	authorized.GET(config.HomeUrl, func(c *gin.Context) {
 		c.JSON(http.StatusOK, "home!")
 	})
 
