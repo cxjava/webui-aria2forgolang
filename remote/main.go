@@ -16,12 +16,16 @@ func init() {
 }
 
 func main() {
-	r := gin.Default()
+	r := gin.Default() 
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
-	// Group using gin.BasicAuth() middleware
-	authorized := r.Group("/", gin.BasicAuth(config.Accounts))
+	authorized := r.Group("/")   
 
+	// Group using gin.BasicAuth() middleware
+	if len(config.Accounts)>0{     
+		authorized.Use(gin.BasicAuth(config.Accounts))
+	}
+	
 	for _, f := range config.StaticFS {
 		authorized.StaticFS("/"+f, http.Dir(f))
 	}
