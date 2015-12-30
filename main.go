@@ -1,30 +1,27 @@
 package main
 
 import (
-	"net/http"
+	"flag"
 
 	"github.com/gin-gonic/contrib/gzip"
 	"github.com/gin-gonic/gin"
 )
 
+var (
+	address = flag.String("a", ":18080", `bind address.`)
+)
+
 func init() {
-	readConfig()
+	flag.Parse()
 }
 
 func main() {
 	r := gin.Default()
+
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
-	// Group using gin.BasicAuth() middleware
-	authorized := r.Group("/", gin.BasicAuth(config.Accounts))
+	r.StaticFS("/yaaw", yaaw)
+	r.StaticFS("/aria", aria)
 
-	for _, f := range config.StaticFS {
-		authorized.StaticFS("/"+f, http.Dir(f))
-	}
-
-	authorized.GET(config.HomeUrl, func(c *gin.Context) {
-		c.JSON(http.StatusOK, "home!")
-	})
-
-	r.Run(config.ListenAddress)
+	r.Run(*address)
 }
