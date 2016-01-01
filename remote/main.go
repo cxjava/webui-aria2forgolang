@@ -4,16 +4,15 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
-	"time"
+	"strings"
 
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 )
 
 var (
-	address       = flag.String("a", ":18080", `bind address.`)
-	remoteAddress = flag.String("ra", "http://67.169.22.135:15555/ping", `remote address.`)
-	pingInterval  = flag.Int("p", 5, `Ping Interval.`)
+	address       = flag.String("a", ":15555", `bind address.`)
+	remoteAddress = ""
 )
 
 func init() {
@@ -40,29 +39,21 @@ func main() {
 		return nil
 	})
 
-	Tick()
+	e.Get("/ping", func(c *echo.Context) error {
+		addressAndPort := c.Request().RemoteAddr
+		fmt.Println("Remote address:", addressAndPort)
+		remoteAddress = addressAndPort[:strings.Index(addressAndPort, ":")]
+		return c.JSON(http.StatusOK, "pong!")
+	})
+
+	e.Get("/ip", func(c *echo.Context) error {
+		return c.HTML(http.StatusOK, `<html>
+			<body>
+			<a href="http://`+remoteAddress+`:2987/" target="_blank">home pi</a>
+			</body>
+			</html>`)
+	})
 
 	fmt.Println("address " + *address)
 	e.Run(*address)
-}
-
-func Tick() {
-	go func() {
-		hb := time.Tick(time.Duration(*pingInterval) * time.Minute)
-		for {
-			select {
-			case <-hb:
-				ping()
-			}
-		}
-	}()
-}
-
-func ping() {
-	resp, err := http.Get(*remoteAddress)
-	if err != nil {
-		fmt.Println("http.Get err:", err)
-	}
-	defer resp.Body.Close()
-	fmt.Println("StatusCode:", resp.StatusCode)
 }
