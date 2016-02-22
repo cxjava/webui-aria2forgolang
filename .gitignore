@@ -24,3 +24,8 @@ _testmain.go
 
 *.exe
 *.exe~
+/vfsdata/yaaw-master
+/vfsdata/webui-aria2-master
+/vfsdata/yaaw_vfsdata.go
+/vfsdata/aria_vfsdata.go
+/vfsdata/compiler.jar
