@@ -9,6 +9,7 @@ import (
 	"sync"
 
 	"github.com/SimonWaldherr/golibs/file"
+	"github.com/Workiva/go-datastructures/queue"
 	"github.com/shurcooL/vfsgen"
 )
 
@@ -21,26 +22,41 @@ func main() {
 	vfsgenFile()
 }
 func Compress() {
-	var w sync.WaitGroup
+	var wg sync.WaitGroup
+	rb := queue.NewRingBuffer(4)
+
+	go func() {
+		for {
+			filepath, err := rb.Get()
+			if err != nil {
+				fmt.Println("rb.Get:", err)
+			}
+			fmt.Println(filepath)
+			cmd := exec.Command("java", "-jar", "compiler.jar", `--js_output_file="`+filepath.(string)+`"`, filepath.(string))
+			data, errr := cmd.Output()
+			if errr != nil {
+				fmt.Println("cmd.Output:", errr)
+			}
+			fmt.Println(string(data))
+			wg.Done()
+		}
+	}()
+
 	err := file.Each("..", true, func(filename, extension, filepath string, dir bool, fileinfo os.FileInfo) {
 		if extension == "js" && !dir {
+			wg.Add(1)
+			err := rb.Put(filepath)
+			if err != nil {
+				fmt.Println("rb.Put:", err)
+			}
 			fmt.Println(filename)
-			w.Add(1)
-			go func() {
-				cmd := exec.Command("java", "-jar", "compiler.jar", `--js_output_file="`+filepath+`"`, `"`+filepath+`"`)
-				data, err := cmd.Output()
-				if err != nil {
-					fmt.Println("java fail:", err)
-				}
-				fmt.Println(string(data))
-				w.Done()
-			}()
 		}
 	})
 	if err != nil {
 		log.Fatalln(err)
 	}
-	w.Wait()
+	wg.Wait()
+	rb.Dispose()
 }
 func vfsgenFile() {
 	var fs http.FileSystem = http.Dir("webui-aria2-master")
