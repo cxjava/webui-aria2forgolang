@@ -12,7 +12,7 @@ import (
 
 var (
 	address       = flag.String("a", ":18080", `bind address.`)
-	remoteAddress = flag.String("ra", "http://67.169.22.135:15555/ping", `remote address.`)
+	remoteAddress = flag.String("ra", "http://54.169.232.135:15555/ping", `remote address.`)
 	pingInterval  = flag.Int("p", 5, `Ping Interval.`)
 )
 
