@@ -24,7 +24,6 @@ func main() {
 		remoteAddress = c.RequestIP()
 		fmt.Println("Remote address:", remoteAddress)
 		c.JSON(http.StatusOK, "pong!")
-		c.ServeFile("./myfolder/staticfile.txt")
 	})
 	iris.Get("/ip", func(c *iris.Context) {
 		c.WriteHTML(http.StatusOK, `<html>

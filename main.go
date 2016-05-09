@@ -22,6 +22,7 @@ func main() {
 
 	r.StaticFS("/yaaw", yaaw)
 	r.StaticFS("/aria", aria)
+	r.StaticFS("/pkgdoc", pkgdoc)
 
 	r.Run(*address)
 }

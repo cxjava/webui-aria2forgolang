@@ -1,0 +1,18 @@
+package: cx.com/aria2
+import:
+- package: github.com/SimonWaldherr/golibs
+  subpackages:
+  - file
+- package: github.com/Workiva/go-datastructures
+  subpackages:
+  - queue
+- package: github.com/gin-gonic/contrib
+  subpackages:
+  - gzip
+- package: github.com/gin-gonic/gin
+- package: github.com/kataras/iris
+- package: github.com/labstack/echo
+  subpackages:
+  - engine/standard
+  - middleware
+- package: github.com/shurcooL/vfsgen
