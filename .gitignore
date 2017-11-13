@@ -27,6 +27,8 @@ _testmain.go
 !upx.exe
 /vfsdata/yaaw-master
 /vfsdata/webui-aria2-master
+yaaw_vfsdata.go
 /vfsdata/yaaw_vfsdata.go
+aria_vfsdata.go
 /vfsdata/aria_vfsdata.go
 /vfsdata/compiler.jar
