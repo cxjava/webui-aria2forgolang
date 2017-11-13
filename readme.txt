@@ -1,5 +1,5 @@
 // frist download yaaw-master.zip and webui-aria2-master.zip and compiler.jar
-// delete folder webui-aria2-master\flags\ ;  webui-aria2-master\screenshots\  ¹ú¼Ê»¯ÎÄ¼ş style.cssÀïÃæµÚÒ»ĞĞ
+// delete folder webui-aria2-master\flags\ ;  webui-aria2-master\screenshots\  å›½é™…åŒ–æ–‡ä»¶ style.cssé‡Œé¢ç¬¬ä¸€è¡Œ
 // and run compilerJS.bat
 // open yaaw_vfsdata.go  and delete _vfsgen_fs
 
