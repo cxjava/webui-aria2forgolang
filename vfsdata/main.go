@@ -16,7 +16,7 @@ import (
 // frist download yaaw-master.zip and webui-aria2-master.zip and compiler.jar
 // delete folder webui-aria2-master\flags\ ;  webui-aria2-master\screenshots\
 // and run compilerJS.bat
-// open yaaw_vfsdata.go  and delete var _vfsgen_fs
+// open yaaw_vfsdata.go  and delete type _vfsgen_fs
 func main() {
 	// Compress()
 	vfsgenFile()
