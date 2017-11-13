@@ -1,5 +1,7 @@
 // frist download yaaw-master.zip and webui-aria2-master.zip and compiler.jar
-// delete folder webui-aria2-master\flags\ ;  webui-aria2-master\screenshots\  国际化文件 style.css里面第一行
+// delete folder webui-aria2-master\flags\ ;  webui-aria2-master\screenshots\  国际化文件 style.css里面第一行 
+init.js 里面的语言文件
+index.html 里面的语言文件引用，还有菜单
 // and run compilerJS.bat
 // open yaaw_vfsdata.go  and delete _vfsgen_fs
 
