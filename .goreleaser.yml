@@ -1,0 +1,45 @@
+builds:
+- env:
+  - CGO_ENABLED=0
+  # main: main.go
+  goos:
+    - windows
+    - darwin
+  goarch:
+    - amd64
+  binary: aria2
+  flags: -tags dev
+  hooks:
+    # Please install upx first, https://github.com/upx/upx/releases
+    post: compress.bat
+    #post: ./compress.sh
+env_files:
+  github_token: ./github_token
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs'
+      - '^tests'
+      - Merge pull request
+      - Merge branch
+archive:
+  name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}_v{{ .Arm }}{{ end }}'
+  format: tar.gz
+  files:
+    - none*
+  wrap_in_directory: false
+  format_overrides:
+    - goos: windows
+      format: zip
+  replacements:
+    amd64: 64-bit
+    386: 32-bit
+    arm: ARM
+    arm64: ARM64
+    darwin: macOS
+    linux: Linux
+    windows: Windows
+    openbsd: OpenBSD
+    netbsd: NetBSD
+    freebsd: FreeBSD
