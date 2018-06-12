@@ -25,6 +25,7 @@ _testmain.go
 *.exe
 *.exe~
 !upx.exe
+dist
 /vfsdata/yaaw-master
 /vfsdata/webui-aria2-master
 /yaaw_vfsdata.go
